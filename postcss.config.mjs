@@ -1,9 +1,7 @@
-/** @type {import('postcss-load-config').Config} */
-const config = {
+// postcss.config.cjs
+module.exports = {
   plugins: {
-    tailwindcss: {}, // 여기서 경고 발생할 수 있음
-    autoprefixer: {}
-  }
+    tailwindcss: {},
+    autoprefixer: {}, // 얘도 일반적으로 CSS 호환을 위해 꼭 둬
+  },
 };
-
-export default config;
