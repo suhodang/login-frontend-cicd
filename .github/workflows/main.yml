@@ -19,20 +19,22 @@ jobs:
         with:
           node-version: "18"
 
-      - name: 📥 Install Dependencies
-        run: npm install
+      - name: 🧹 Clean install to fix rollup native module issue (Yarn)
+        run: |
+          rm -rf node_modules yarn.lock
+          yarn install --frozen-lockfile
 
       - name: ⚙️ Set Environment Variables
         run: echo "VITE_BACKEND_API_URL=${{ secrets.VITE_BACKEND_API_URL }}" > .env
 
       - name: 🛠️ Build Project
-        run: npm run build
+        run: yarn build
 
       - name: 🧪 Run Tests
-        run: npm run test
+        run: yarn test
 
       - name: 📤 Upload Build Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: vite-build
           path: dist
