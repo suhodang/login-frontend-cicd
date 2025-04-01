@@ -7,20 +7,23 @@ export default function RegisterForm() {
     const [password, setPassword] = useState<string>("");
     const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [phoneNumber, setPhoneNumber] = useState<string>("");
-    const [error, setError] = useState("");
+    const [error, setError] = useState<string>("");
+    const [success, setSuccess] = useState(false);
+
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
+    
         if (password !== confirmPassword) {
             setError("비밀번호가 일치하지 않습니다.");
             return;
         }
-
+    
         try {
-            // TODO: 여기에 signupApi 연결
+            const { registerApi } = await import("../../api/auth");
             await registerApi({ email, password, username, phone_number: phoneNumber });
-            setError(""); // 성공 시 오류 초기화
+            setError("");
+            setSuccess(true); // ✅ 성공 메시지 플래그 켜기
         } catch (err) {
             setError("회원가입에 실패했습니다.");
         }
@@ -67,6 +70,7 @@ export default function RegisterForm() {
                 />
 
                 {error && <p className="text-red-500 text-sm">{error}</p>}
+                {success && <p className="text-green-500 text-sm">회원가입 완료</p>}
 
                 <button
                     type="submit"

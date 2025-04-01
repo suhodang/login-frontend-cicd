@@ -17,20 +17,19 @@ jobs:
       - name: 🔧 Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "18" # 필요 시 Node.js 버전 변경 가능
+          node-version: "18"
 
       - name: 📥 Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: ⚙️ Set Environment Variables
         run: echo "VITE_BACKEND_API_URL=${{ secrets.VITE_BACKEND_API_URL }}" > .env
 
+      - name: 🧪 Run Unit & Integration Tests
+        run: npx vitest run --coverage
+
       - name: 🛠️ Build Project
         run: npm run build
-
-      # 선택: 테스트 스크립트가 있다면 활성화하세요
-      # - name: 🧪 Run Tests
-      #   run: npm run test
 
       - name: 📤 Upload Build Artifacts
         uses: actions/upload-artifact@v3
