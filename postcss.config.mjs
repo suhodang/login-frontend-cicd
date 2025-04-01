@@ -1,12 +1,9 @@
 /** @type {import('postcss-load-config').Config} */
-import tailwindcss from "@tailwindcss/postcss";
-import autoprefixer from "autoprefixer";
-
 const config = {
   plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
-  },
+    tailwindcss: {}, // 여기서 경고 발생할 수 있음
+    autoprefixer: {}
+  }
 };
 
 export default config;
