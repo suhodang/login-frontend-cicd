@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { registerApi } from "../../api/auth";
-
 export default function RegisterForm() {
     const [username, setUsername] = useState<string>("");
     const [email, setEmail] = useState<string>("");
