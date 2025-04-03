@@ -24,6 +24,7 @@ export default function RegisterForm() {
             setSuccess(true); // ✅ 성공 메시지 플래그 켜기
         } catch (err) {
             setError("회원가입에 실패했습니다.");
+            console.error(err);
         }
     };
 
